@@ -36,7 +36,9 @@ $(document).ready(function () {
 	let isMouseEnter = false;
 	let controls = { manual: false };
 	let mouse = new THREE.Vector2();
+	let currentWidth = 0;
 	let resizeCanvas = function () {
+		if (currentWidth == window.innerWidth) return;
 		renderer.setPixelRatio(window.devicePixelRatio);
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		camera.aspect = window.innerWidth / window.innerHeight;
