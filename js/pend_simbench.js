@@ -53,7 +53,7 @@ $(document).ready(function () {
 		polygonOffsetFactor: 2, // positive value pushes polygon further away
 		polygonOffsetUnits: 1
 	});
-	let mat_wire = new THREE.LineBasicMaterial({ color: 0x426579, linewidth: 2 });
+	let mat_wire = new THREE.LineBasicMaterial({ color: 0x426579, linewidth: 1 });
 
 	let mat_body = new THREE.MeshToonMaterial({
 		color: 0xffffff,
