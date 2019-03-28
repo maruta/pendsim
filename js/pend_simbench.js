@@ -85,7 +85,7 @@ $(document).ready(function () {
 
 	let logo_geometry = new THREE.PlaneGeometry(arm_sx, arm_sz);
 	logo_geometry.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, arm_sy / 2));
-	let texture = new THREE.TextureLoader().load('../textures/logo.png');
+	let texture = new THREE.TextureLoader().load('./textures/logo.png');
 	// workaround for safari texture problem
 	// https://github.com/mrdoob/three.js/issues/1338
 	texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
@@ -124,8 +124,8 @@ $(document).ready(function () {
 	var drag_geometry = new THREE.PlaneGeometry(2*text_scale, 1* text_scale);
 	var drag_geometry_r = new THREE.PlaneGeometry(2* text_scale, 1* text_scale);
 	drag_geometry_r.applyMatrix(new THREE.Matrix4().makeRotationY(Math.PI));
-	var drag_texture = new THREE.TextureLoader().load('../textures/drag.png');
-	var drag_texture_r = new THREE.TextureLoader().load('../textures/drag_r.png');
+	var drag_texture = new THREE.TextureLoader().load('./textures/drag.png');
+	var drag_texture_r = new THREE.TextureLoader().load('./textures/drag_r.png');
 	// workaround for safari texture problem
 	// https://github.com/mrdoob/three.js/issues/1338
 	drag_texture.wrapS = drag_texture.wrapT = THREE.RepeatWrapping;
