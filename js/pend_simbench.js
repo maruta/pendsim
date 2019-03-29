@@ -30,7 +30,7 @@ $(document).ready(function () {
 	}, {});
 
 	let scene = new THREE.Scene();
-	let camera = new THREE.PerspectiveCamera(('fov' in opts) ? opts['fov'] : 30, window.innerWidth / window.innerHeight, 0.1, 20);
+	let camera = new THREE.PerspectiveCamera(('fov' in opts) ? opts['fov'] : 35, window.innerWidth / window.innerHeight, 0.1, 20);
 	let renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 	let container = $('body');
 	let isMouseEnter = false;
