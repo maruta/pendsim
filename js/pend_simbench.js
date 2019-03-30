@@ -30,7 +30,14 @@ $(document).ready(function () {
 	}, {});
 
 	let scene = new THREE.Scene();
-	let camera = new THREE.PerspectiveCamera(('fov' in opts) ? opts['fov'] : 35, window.innerWidth / window.innerHeight, 0.1, 20);
+	let vfov = ('fov' in opts) ? opts['fov'] : 35;
+	let hfov = ('hfov' in opts) ? opts['hfov'] : 35;
+
+	let min_vfov = function(asr){
+		return Math.atan(1/asr*Math.tan(2*Math.PI*hfov/360/2))*360/(2*Math.PI)*2
+	}
+	let aspect_ratio = window.innerWidth / window.innerHeight;
+	let camera = new THREE.PerspectiveCamera(Math.max(vfov,min_vfov(aspect_ratio)), aspect_ratio, 0.1, 20);
 	let renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 	let container = $('body');
 	let isMouseEnter = false;
@@ -41,6 +48,7 @@ $(document).ready(function () {
 		renderer.setPixelRatio(window.devicePixelRatio);
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.fov = Math.max(vfov,min_vfov(camera.aspect));	
 		camera.updateProjectionMatrix();
 	}
 	document.body.append(renderer.domElement);
