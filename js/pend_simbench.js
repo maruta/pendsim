@@ -89,21 +89,30 @@ $(document).ready(function () {
 	let geo;
 	geo = new THREE.CubeGeometry(arm_sx, arm_sy, arm_sz);
 	let arm = new THREE.Mesh(geo, mat_body);
-	scene.add(arm);
-	add_wire(arm);
 
 	let logo_geometry = new THREE.PlaneGeometry(arm_sx, arm_sz);
 	logo_geometry.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, arm_sy / 2));
+	logo_geometry.applyMatrix(new THREE.Matrix4().makeRotationY(-Math.PI));
+	var logo_geometry_r = new THREE.PlaneGeometry(arm_sx, arm_sz);
+	logo_geometry_r.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, arm_sy / 2));
 	let texture = new THREE.TextureLoader().load('./textures/logo.png');
+	let texture_r = new THREE.TextureLoader().load('./textures/logo_r.png');
 	// workaround for safari texture problem
 	// https://github.com/mrdoob/three.js/issues/1338
 	texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 	texture.repeat.set(1, 1);
 	let logo_material = new THREE.MeshBasicMaterial({transparent:true, side: THREE.DoubleSide, map: texture })
+	let logo_material_r = new THREE.MeshBasicMaterial({transparent:true, side: THREE.DoubleSide, map: texture_r })
 	let logo = new THREE.Mesh(logo_geometry, logo_material);
+	let logo_r = new THREE.Mesh(logo_geometry_r, logo_material_r);
 	logo.rotation.x = Math.PI / 2;
 	logo.rotation.order = "ZXY";
-	scene.add(logo);
+	logo_r.rotation.x = Math.PI / 2;
+	logo_r.rotation.order = "ZXY";
+	add_wire(arm);
+	arm.add(logo);
+	arm.add(logo_r);
+	scene.add(arm);
 
 	geo = new THREE.CubeGeometry(board_sx, board_sy, board_sz);
 	let board = new THREE.Mesh(geo, mat_body);
@@ -312,7 +321,6 @@ $(document).ready(function () {
 
 	function set_dynamic_object_positions(phi, theta1, theta2) {
 		arm.rotation.z = phi;
-		logo.rotation.z = phi + Math.PI;
 		motor_upper.rotation.z = phi;
 
 		enc1.rotation.z = Math.PI / 2 + phi;
